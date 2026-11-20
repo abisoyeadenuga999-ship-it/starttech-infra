@@ -28,3 +28,10 @@ module "eks" {
   private_subnet_ids = module.networking.private_subnet_ids
   public_subnet_ids  = module.networking.public_subnet_ids
 }
+
+module "database" {
+  source                     = "./modules/database"
+  vpc_id                     = module.networking.vpc_id
+  private_subnet_ids         = module.networking.private_subnet_ids
+  eks_node_security_group_id = module.eks.node_security_group_id
+}
